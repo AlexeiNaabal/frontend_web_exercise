@@ -1,22 +1,3 @@
-var cnt = 0;
-function addOnloadEvent(func){
-    var oldOnload = window.onload;
-    if(typeof(window.onload) != 'function'){
-        if(typeof(func) == 'function'){
-            window.onload = func();
-        }
-    }
-    else{
-        if(typeof(func) == 'function'){
-            window.onload = function(){
-                oldOnload();
-                func();
-            }
-        }
-    }
-    ++cnt;
-}
-
 function showSideDiv(itemClassName, listToShow){
     if(!document.getElementById && !document.getElementsByTagName && !document.getElementsByClassName){
         return false;
@@ -31,6 +12,9 @@ function showSideDiv(itemClassName, listToShow){
                 if(typeof(elemListToShow) !== 'undefined'){
                     elem[n].onmouseover = function(e){
                         var rel = e.relatedTarget;
+                        if(!rel){
+                            return false;
+                        }
                         var cmp = this.compareDocumentPosition(rel);
                         if((cmp == 20 || cmp == 0)){
                             return;
@@ -42,9 +26,13 @@ function showSideDiv(itemClassName, listToShow){
                     }
                     elem[n].onmouseout = function(e){
                         var rel = e.relatedTarget;
+                        if(!rel){
+                            return false;
+                        }
                         var cmp = this.compareDocumentPosition(rel);
                         if(cmp>=2 && cmp <= 10){
                             // console.log("should fadeout");
+
                             elemListToShow.style.display = "none";
                             elemListToShow.style.opacity = 0;
                             // fadeOut(listToShow, 5);
@@ -96,3 +84,56 @@ function fadeOut(elemName, duration){
 
 // addOnloadEvent(showSideDiv);
 showSideDiv('firstlistclass', 'secondlist');
+
+function sectionLeftTitleAnimation(){
+    var elem = document.getElementsByClassName('list-section-title')[0];
+    if(!elem.style.opacity){
+        elem.style.opacity = 1;
+    }
+    var op = parseFloat(elem.style.opacity);
+    
+    elem.onmouseover = function (){
+        turnBright('list-section-title', 0.5);
+    }
+    elem.onmouseout = function (){
+        resetBright('list-section-title', 0.5);
+    }
+}
+
+function turnBright(elemClass, interval){
+    console.log("up");
+    var elem = document.getElementsByClassName(elemClass)[0];
+    if(!elem.style.opacity){
+        elem.style.opacity = 1;
+    }
+    var op = parseFloat(elem.style.opacity);
+    if(op >= 0.6){
+        op -= 0.01;
+    }
+    else{
+        return true;
+    }
+    elem.style.opacity = op;
+    var repeat = "turnBright('" + elemClass + "'," + interval + ")";
+    setTimeout(repeat, interval);
+}
+
+function resetBright(elemClass, interval){
+    console.log("down");
+    var elem = document.getElementsByClassName(elemClass)[0];
+    // if(!elem.style.opacity){
+    //     elem.style.opacity = 1;
+    // }
+    var op = parseFloat(elem.style.opacity);
+    if(op <= 1){
+        op += 0.02;
+    }
+    else{
+        return true;
+    }
+    elem.style.opacity = op;
+    var repeat = "resetBright('" + elemClass +"'," + interval + ")";
+    setTimeout(repeat, interval);
+}
+
+addOnloadEvent(sectionLeftTitleAnimation);
