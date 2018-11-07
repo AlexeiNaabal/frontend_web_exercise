@@ -1,9 +1,9 @@
+# -*- coding: UTF-8 -*-
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 from io import BytesIO
 import json
 import subprocess
-import cgi, cgitb
 import urllib
 import requests
 
@@ -18,32 +18,38 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
 
     def do_GET(self):
+        file = open('data.json', encoding='gbk')
+        content = json.load(file)
+        # send = BytesIO().read(content)
+        content = json.dumps(content, ensure_ascii=False)
+        # content = bytes(content, encoding='utf-8')
+        div = '<span>' + content + '</span>'
+        div = bytes(div, encoding='utf-8')
+        # print(content)
         self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Type', 'text/html')
+        self.send_header('Content-Length', str(len(div)))
         self.end_headers()
-        self.wfile.write(b'Hellow World')
+        self.wfile.write(div)
 
 
     def do_POST(self):
         self.send_response(200)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header('Content-type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Type', 'application/json')
         self.end_headers()
 
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
 
-        form = cgi.FieldStorage()
-        cmt = form.getvalue('test')
-        # json.loads(body)
-
         jsonVal = body.decode('utf-8').replace("'", '"')
         data = json.loads(jsonVal)
 
-        dumpVal = json.dumps(data, indent=4)
-        # response = subprocess.check_output(["test", self.path])
-        # self.wfile.write(json.dumps(response))
-        # self.wfile.write(self.rfile.read())
+        dumpVal = json.dumps(data, indent=4, ensure_ascii=False)
         print(dumpVal)
+        with open("data.json", "w") as file:
+            json.dump(data, file, ensure_ascii=False)
 
 httpd = HTTPServer(('', 183), SimpleHTTPRequestHandler)
 httpd.serve_forever()
