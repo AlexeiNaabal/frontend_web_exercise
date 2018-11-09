@@ -13,10 +13,8 @@ var data = {
         }
     ]
 }
-$(".testbtn").click(function (e) {
-    // alert("click");
-    e.preventDefault();
-    
+
+function onPost(){
     var comment = $("#test").val();
     console.log($("#test"));
     if (!comment) {
@@ -51,5 +49,44 @@ $(".testbtn").click(function (e) {
             }
         });
     }
+}
+
+function onGet(){
+    $.ajax({
+        url: 'http://127.0.0.1:183',
+        type: 'GET',
+        dataType: 'json',
+        success: function(responseText){
+            // console.log(responseText)
+        },
+        complete: function(result){
+            // console.log(result);
+            res = $.parseJSON(result.responseText);
+            var i = 0;
+            for(; i < res.hold.books.length;++i){
+                (function(i){
+                    var appending = appendpre + res.test + ': ' + res.hold.books[i]['language'] + ',' + res.hold.books[i]['lastname'] + appendpost;
+
+                    $('body').append(appending);
+                })(i);
+            }
+            $('.cmtbtn').click(function(){
+                var subappend = '<form><textarea name="textsubmitted" id="test"></textarea></form><br><button class="cmtbtn">Comment</button><hr>'
+                // var input1 = $('.testbtn').clone();
+                // var input2 = $('.reqbtn').clone();
+                // $(".appended").on("click", ".testbtn", onPost());
+                // $(".appended").on("click", ".reqbtn", onGet());
+                $(this).parent().append(subappend);
+                
+            });
+        }
+    });
     return false;
-})
+};
+
+$(".testbtn").click(onPost);
+
+//appendstyle = 'style="width:100%;"'
+appendpre = '<span class="appended">';
+appendpost = '</span><br>';
+$('.reqbtn').click(onGet);

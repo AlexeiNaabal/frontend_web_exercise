@@ -23,12 +23,12 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         # send = BytesIO().read(content)
         content = json.dumps(content, ensure_ascii=False)
         # content = bytes(content, encoding='utf-8')
-        div = '<span>' + content + '</span>'
+        div = content
         div = bytes(div, encoding='utf-8')
         # print(content)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Content-Type', 'text/html')
+        self.send_header('Content-Type', 'application/json')
         self.send_header('Content-Length', str(len(div)))
         self.end_headers()
         self.wfile.write(div)
