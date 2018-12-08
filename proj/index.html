@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="Sunday 26 October 2008 01:00 GMT" />
+    <meta http-equiv="content-language" content="zh-CN" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/calendar.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <script src="./js/vue2.5.js"></script>
+</head>
+
+<body>
+
+    <div class="calendarapp">
+        
+        <!--head function bar-->
+        <header class="header">
+            <div class="header-menu" v-bind:class="{'is-active': hamburger}" v-on:click="toggleActive">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+            <img src="" alt="calendar app icon">
+            <span class="header-appname">Calendar</span>
+
+            <span class="header-jumptotoday header-button unSelectable">Today</span>
+            <span class="header-prevDay header-arrow unSelectable"><</span>
+            <span class="header-nextDay header-arrow unSelectable">></span>
+            <div class="header-current-day">
+                <span class="header-date"></span>
+                <span class="header-luna-date"></span>
+            </div>
+            <span class="header-search"></span>
+            <span class="header-formstyle-select header-button unSelectable">
+                <div style="position:relative; border:1px solid black;">
+                    <li>Day</li>
+                    <li>Week</li>
+                    <li>Month</li>
+                </div>
+            </span>
+            <span class="header-config"></span>
+            <span class="google-apps-menu"></span>
+            <span class="header-notification-icon"></span>
+            <span class="google-account-icon"></span>
+        </header>
+
+        <!--main content-->
+        <main class="main-content">
+
+            <!--aside-->
+            <aside class="main-aside">
+
+                <!--calendar-->
+                <section class="main-aside-calendar">
+                    section
+                </section>
+                <hr>
+
+                <!--mine and others calendar tab-->
+                <section class="main-aside-calendar-name">
+                    section
+                </section>
+                <hr>
+
+                <!--others calendar tab-->
+                <section class="main-aside-other-calendar">
+                    section
+                </section>
+
+                <footer class="footer">
+                    right decleration
+                </footer>
+            </aside>
+
+            <!--calendar to-do list content-->
+            <div class="main-showpage">
+                main
+            </div>
+
+
+        </main>
+    </div>
+
+
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

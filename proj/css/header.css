@@ -1,0 +1,68 @@
+.header{
+    width: 100%;
+    height: 8%;
+    /* background: rgb(219, 172, 155); */
+    background: #fefefe;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header-menu{
+    padding-left: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.header-menu.is-active .line:nth-child(1){
+    width: 16px;
+}
+
+.header-menu.is-active .line:nth-child(2){
+    width: 20px;
+}
+
+.header-menu.is-active .line{
+    -webkit-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+
+.header-button{
+    cursor: pointer;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: 10%;
+    background: rgba(244,244,244,0.8);
+    text-align: center;
+    line-height: 1.5rem;
+}
+
+.header-arrow{
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 2rem;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    background: #fff;
+    border-radius: 100%;
+}
+
+.header-prevDay{
+}
+
+.header-arrow:hover{
+    background: rgba(244,244,244,0.8);
+    border-radius: 50%;
+}
+
+.header-formstyle-select{
+    width: 3.5rem;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    list-style-type: none;
+}
