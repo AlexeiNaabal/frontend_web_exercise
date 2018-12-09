@@ -15,6 +15,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/calendar.css">
     <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/asidecalendar.css">
     <script src="./js/vue2.5.js"></script>
 </head>
 
@@ -40,13 +41,13 @@
                 <span class="header-luna-date"></span>
             </div>
             <span class="header-search"></span>
-            <span class="header-formstyle-select header-button unSelectable">
-                <div style="position:relative; border:1px solid black;">
-                    <li>Day</li>
-                    <li>Week</li>
-                    <li>Month</li>
-                </div>
+
+            <!--form style drop box-->
+            <span class="header-formstyle-select header-button unSelectable" v-on:click="toggleHeaderDropbox">
+                <span>Day</span>
+                <header-drop-menu v-if="dropbox"></header-drop-menu>
             </span>
+
             <span class="header-config"></span>
             <span class="google-apps-menu"></span>
             <span class="header-notification-icon"></span>
@@ -61,7 +62,8 @@
 
                 <!--calendar-->
                 <section class="main-aside-calendar">
-                    section
+                    
+                    <asidecalendar></asidecalendar>
                 </section>
                 <hr>
 

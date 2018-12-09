@@ -1,37 +1,77 @@
 var headerDropMenu = {
-    data: function(){
-        var formStyle = [
-            {
-                day: 'Day',
+    data: function () {
+        var formStyle = [{
+                style: 'Day',
                 val: 1,
             },
             {
-                week: 'Week',
+                style: 'Week',
                 val: 2,
             },
             {
-                month: 'Month',
+                style: 'Month',
                 val: 3,
             },
             {
-                year: 'Year',
+                style: 'Year',
                 val: 4,
             },
 
         ]
-        return formStyle;
+        return {formStyle};
     },
-    template:`
-        
+    template: `
+    <transition name="slide-fade">
+        <div class="header-dropbox" >
+            <li v-for="form in formStyle">{{form.style}}</li>
+        </div>
+    </transition>
     `
+}
+
+var asidecalendar = {
+    template: `
+    <div>
+        <!--current month-->
+        <span></span>
+        <!--switch arrow btn-->
+        <span><</span>
+        <span>></span>
+        <!--calendar itself-->
+        <ul class="smallcalendar">
+            <li v-for="day in days">
+                <span>{{day.day}}</span>
+            </li>
+        </ul>
+    </div>
+    `,
+    data: function(){
+        var asidecalendardata = {
+            curDay: 1,
+            curWeek: 1,
+            curMonth: 1,
+            curYear: 1970,
+            //basic component of days: an date object contains day, week, month and year
+            days: [],
+            cellNum: 42,
+        }
+        return asidecalendardata;
+    },
+    created: function(){
+        this.initData(null);
+    },
+    methods: {
+        initData: function(dateobj){
+
+        }
+    }
 }
 
 var calendar = new Vue({
     el: '.calendarapp',
     data: {
         hamburger: false,
-        formStyle: [
-            {
+        formStyle: [{
                 day: 'Day',
                 val: 1,
             },
@@ -48,7 +88,8 @@ var calendar = new Vue({
                 val: 4,
             },
 
-        ]
+        ],
+        dropbox: false,
     },
     created: function () {
 
@@ -62,9 +103,16 @@ var calendar = new Vue({
         },
         toggleActive: function () {
             this.hamburger = !this.hamburger;
+        },
+        toggleHeaderDropbox: function () {
+            this.dropbox = !this.dropbox;
         }
     },
     computed: {
 
     },
+    components:{
+        'headerDropMenu': headerDropMenu,
+        'asidecalendar': asidecalendar,
+    }
 })
