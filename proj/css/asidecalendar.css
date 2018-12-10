@@ -1,3 +1,11 @@
+.aside-calendar-title{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
 .smallcalendar{
     width: 100%;
     display: flex;
@@ -6,10 +14,19 @@
     flex-direction: row;
 }
 
-.smallcalendar li{
+li{
     list-style-type: none;
     display: inline-block;
     width: 14.2%;
     text-align: center;
     font-size: 0.9rem;
+}
+
+.aside-calendar-function{
+    width: 100%;
+}
+.aside-calendar-btns span{
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
