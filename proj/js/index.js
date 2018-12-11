@@ -16,7 +16,6 @@ var headerDropMenu = {
                 style: 'Year',
                 val: 4,
             },
-
         ]
         return {formStyle};
     },
@@ -24,6 +23,9 @@ var headerDropMenu = {
     <transition name="slide-fade">
         <div class="header-dropbox" >
             <li v-for="form in formStyle">{{form.style}}</li>
+            <div class="header-dropbox-config">
+                padding
+            </div>
         </div>
     </transition>
     `
@@ -38,22 +40,22 @@ var asidecalendar = {
         <div class="aside-calendar-function">
             <span>{{browseDate}}</span>
             <div class="aside-calendar-btns">
-                <span class="unSelectable" v-on:click="browsePrev"><</span>
-                <span class="unSelectable" v-on:click="browseNext">></span>
+                <span class="unSelectable arrow" v-on:click="browsePrev"><</span>
+                <span class="unSelectable arrow" v-on:click="browseNext">></span>
             </div>
         </div>
         <!--calendar itself-->
         <ul class="aside-calendar-title">
+            <li>日</li>
             <li>一</li>
             <li>二</li>
             <li>三</li>
             <li>四</li>
             <li>五</li>
             <li>六</li>
-            <li>日</li>
         </ul>
         <ul class="smallcalendar">
-            <li v-for="day in days">
+            <li v-for="day in days" class="calendarli">
                 <span>{{day.day}}</span>
             </li>
         </ul>
@@ -106,7 +108,7 @@ var asidecalendar = {
                 var year = dateobj.getFullYear();
                 console.log(dateobj.toLocaleDateString());
                 var monthStart = new Date(year, month + 1, 1);
-
+                this.browseDate = this.formatDate(monthStart.getFullYear(), monthStart.getMonth()+1, 1);
                 this.constructDay(monthStart);
             }
         },
@@ -116,8 +118,10 @@ var asidecalendar = {
             var month = dateobj.getMonth();
             var year = dateobj.getFullYear();
             this.days.length = 0;
-            
-            for(var i = weekday - 1; i >= 1;--i){
+            if(weekday == 0){
+                weekday = 7;
+            }
+            for(var i = weekday; i >= 1;--i){
                 var d = new Date(year, month, day);
                 d.setDate(-i + 1);
                 console.log(d.toLocaleDateString());
@@ -126,7 +130,7 @@ var asidecalendar = {
                 }
                 this.days.push(newDay);
             }
-            for(var i = 1;i <= this.cellNum - weekday + 1;++i){
+            for(var i = 1;i <= this.cellNum - weekday;++i){
                 var d = new Date(year, month, i);
                 console.log(d.toLocaleDateString());
                 var newDay = {
@@ -136,25 +140,21 @@ var asidecalendar = {
             }
         },
         browsePrev: function(){
-            // --this.browseMonth;
-            // if(this.browseMonth < 0){
-            //     --this.browseYear;
-            //     this.browseMonth = 11;
-            // }
-            this.browseDate = this.formatDate(this.browseYear, this.browseMonth, this.curDay);
-            var d = new Date(this.browseYear, this.browseMonth--, this.curDay);
-            d.setDate(-this.cellNum);
-            console.log(d.toLocaleDateString() + ' ' + this.browseMonth);
+            var d = new Date(this.formatDate(this.browseYear, this.browseMonth, 1));
+            d.setDate(0);
+            // console.log('prev generated: ' + d.toLocaleDateString() + ' ' + this.browseMonth);
+            this.browseYear = d.getFullYear();
+            this.browseMonth = d.getMonth()+1;
+            this.browseDay = d.getDate();
             this.initData(d);
         },
         browseNext: function(){
-            //++this.browseMonth;
-            if(this.browseMonth > 11){
-                ++this.browseYear;
-                this.browseMonth = 0;
-            }
-            this.browseDate = this.formatDate(this.browseYear, this.browseMonth, this.curDay);
-            var d = new Date(this.browseYear, this.browseMonth++, this.curDay);
+            var d = new Date(this.formatDate(this.browseYear, this.browseMonth, 1));
+            d.setDate(this.cellNum);
+            
+            this.browseYear = d.getFullYear();
+            this.browseMonth = d.getMonth()+1;
+            this.browseDay = d.getDate();
             this.initData(d);
         },
         formatDate: function(year, month, day){
