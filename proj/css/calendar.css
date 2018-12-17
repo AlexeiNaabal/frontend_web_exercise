@@ -41,17 +41,15 @@ body .calendarapp{
 
 .main-aside-calendar{
     width: 100%;
-    min-height: 35%;
-    max-height: 35%;
     background: #fefefe;
     border-right: 1px solid grey;
     border-bottom: 1px solid grey;
+    padding: 10px 0;
 }
 
 .main-aside-calendar-name{
     width: 100%;
-    min-height: 35%;
-    max-height: 35%;
+    height: 35%;
     background: #fefefe;
     border-right: 1px solid grey;
     border-bottom: 1px solid grey;
@@ -59,8 +57,7 @@ body .calendarapp{
 
 .main-aside-other-calendar{
     width: 100%;
-    min-height: 23%;
-    max-height: 23%;
+    height: 30%;
     background: #fefefe;
     border-right: 1px solid grey;
     border-bottom: 1px solid grey;

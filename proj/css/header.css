@@ -58,7 +58,7 @@
 /* .header-prevDay {} */
 
 .header-arrow:hover {
-    background: rgba(223, 223, 223, 0.9);
+    background: rgba(0, 0, 0, 0.1);
     border-radius: 50%;
 }
 
@@ -88,22 +88,36 @@
 } */
 
 .header-dropbox {
-    width: 6rem;
+    margin-top: 0.5rem;
+    width: 8rem;
     background: #fefefe;
     position: relative;
-    border-radius: 4%;
+    border-radius: 1%;
     transition: all 0.3s;
     padding: 10px 0;
+    box-shadow: 0px 2px 8px #888888;
     /* border-bottom: 1px solid grey; */
 }
 
 
 .header-dropbox li {
     /* padding: 0.5rem 0; */
-    width: 6rem;
     text-align: center;
     transition: background 0.5s;
     background: #fefefe;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+}
+
+.header-dropbox .drop-item{
+    -webkit-box-flex:1;
+}
+
+.item-left{
+    margin-right: 20px;
+}
+.item-right{
+    margin-left: 20px;
 }
 
 .header-dropbox li:hover { 
@@ -121,7 +135,7 @@
 }
 
 .header-dropbox-config{
-    width: 90%;
+    width: 100%;
     text-align: center;
     border-top: 1px solid grey;
 }

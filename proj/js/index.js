@@ -1,28 +1,36 @@
 var headerDropMenu = {
     data: function () {
-        var formStyle = [{
-                style: 'Day',
-                val: 1,
+        var formStyle = [
+            {
+                style: '日',
+                val: 'D',
             },
             {
-                style: 'Week',
-                val: 2,
+                style: '周',
+                val: 'W',
             },
             {
-                style: 'Month',
-                val: 3,
+                style: '月',
+                val: 'M',
             },
             {
-                style: 'Year',
-                val: 4,
+                style: '年',
+                val: 'Y',
             },
-        ]
+        ];
         return {formStyle};
     },
     template: `
     <transition name="slide-fade">
         <div class="header-dropbox" >
-            <li v-for="form in formStyle">{{form.style}}</li>
+            <li v-for="form in formStyle">
+                <div class="drop-item item-left">
+                    {{form.style}}
+                </div>
+                <div class="drop-item item-right">
+                    {{form.val}}
+                </div>
+            </li>
             <div class="header-dropbox-config">
                 padding
             </div>
@@ -33,7 +41,7 @@ var headerDropMenu = {
 
 var asidecalendar = {
     template: `
-    <div>
+    <div class="aside-calendar">
         <!--current month-->
         <span></span>
         <!--switch arrow btn-->
@@ -168,25 +176,8 @@ var calendar = new Vue({
     el: '.calendarapp',
     data: {
         hamburger: false,
-        formStyle: [{
-                day: 'Day',
-                val: 1,
-            },
-            {
-                week: 'Week',
-                val: 2,
-            },
-            {
-                month: 'Month',
-                val: 3,
-            },
-            {
-                year: 'Year',
-                val: 4,
-            },
-
-        ],
         dropbox: false,
+        hit: false,
     },
     created: function () {
 
@@ -203,6 +194,9 @@ var calendar = new Vue({
         },
         toggleHeaderDropbox: function () {
             this.dropbox = !this.dropbox;
+        },
+        toggleHeaderBtnHit: function(){
+            this.hit = !this.hit;
         }
     },
     computed: {
