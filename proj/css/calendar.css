@@ -11,72 +11,55 @@ body{
     height: 100%;
     padding: 0 2px;
 }
-::-webkit-scrollbar{
-    height: 0px;
-}
 body .calendarapp{
     width: 100%;
     height: 100%;
 }
 
+
 .main-content{
     width: 100%;
     height: 92%;
-    /* min-height: 92%; */
-    /* max-height: 92%; */
     background: grey;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
 }
 
 .main-aside{
-    min-width: 270px;
-    max-width: 270px;
+    width: 20%;
     height: 100%;
     background: #fff;
-    padding: 0 0 0 6px;
-    /* overflow: hidden; */
 }
 
 .main-aside-calendar{
     width: 100%;
-    background: #fefefe;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
-    padding: 10px 0;
+    height: 35%;
+    background: rgb(0, 153, 255);
 }
 
 .main-aside-calendar-name{
     width: 100%;
     height: 35%;
-    background: #fefefe;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
+    background:rgb(4, 0, 255);
 }
 
 .main-aside-other-calendar{
     width: 100%;
-    height: 30%;
-    background: #fefefe;
-    border-right: 1px solid grey;
-    border-bottom: 1px solid grey;
+    height: 23%;
+    background: rgb(225, 0, 255);
 }
 
 .footer{
     width: 100%;
-    min-height: 5%;
-    max-height: 5%;
+    height: 5%;
     color: crimson;
     background: white;
-    border-right: 1px solid grey;
 }
 
 .main-showpage{
     width: 80%;
     height: 100%;
-    background: rgba(0,0,0,0.1);
-    /* overflow: hidden; */
+    background: black;
 }
 
 
@@ -89,6 +72,7 @@ body .calendarapp{
     margin: 3px auto;
     transition: all 0.3s ease-in-out;
     border-radius: 4px;
+    
 }
 
 .unSelectable{
